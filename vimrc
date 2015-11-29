@@ -84,9 +84,9 @@ set expandtab
 set smarttab
 set autoindent
 set smartindent
-set wrap " wrap lines
+set wrap
 set lbr
-set tw=500 " linebreak on 500 chars
+set tw=500
 
 set noshowmode
 
@@ -97,11 +97,6 @@ let g:bufferline_echo = 0
 let g:cpp_class_scope_highlight = 1
 "autocmd vimenter * NERDTree
 let g:ycm_show_diagnostics_ui = 0
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
