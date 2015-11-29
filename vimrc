@@ -12,11 +12,13 @@ Plugin 'gmarik/Vundle.vim'
 """ plugins after here
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
-
+Plugin 'octol/vim-cpp-enhanced-highlight'
 """ plugins before here
 
 call vundle#end()
 
+" keep cursor on middle line
+set scrolloff=10000
 
 " determine file type based on its name or possibly its contents
 filetype indent plugin on
