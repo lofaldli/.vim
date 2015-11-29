@@ -1,4 +1,4 @@
-" this is vim, not vi 
+" this is vim, not vi
 set nocompatible
 
 " vundle setup
@@ -11,10 +11,13 @@ Plugin 'gmarik/Vundle.vim'
 
 """ plugins after here
 Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
 """ plugins before here
 
 call vundle#end()
@@ -70,7 +73,7 @@ set t_vb=
 set tm=500
 
 " enable mouse WHY??
-"set mouse=a 
+"set mouse=a
 
 
 " line numbers, tabs, indentation and line breaks
@@ -85,15 +88,22 @@ set wrap " wrap lines
 set lbr
 set tw=500 " linebreak on 500 chars
 
-" vim-airline stuff
+set noshowmode
+
+" plugin settings stuff
+"let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-set noshowmode " hide mode indicator, this is shown in airline
-
-" vim-cpp-enhanced-highlight stuff
+let g:bufferline_echo = 0
 let g:cpp_class_scope_highlight = 1
-
-" nerdtree stuff
 "autocmd vimenter * NERDTree
+let g:ycm_show_diagnostics_ui = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
