@@ -6,6 +6,13 @@ my vim config
   
   `git clone https://github.com/gmarik/Vundle.vim bundle/Vundle.vim`
   
+## compiling YouCompleteMe
+  
+  ```
+  cd .vim/bundle/YouCompleteMe
+  ./install.sh
+  ```
+
 ## installing fonts fo vim-airline
 
 1. clone patched powerline fonts
