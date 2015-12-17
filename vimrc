@@ -18,6 +18,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
+Plugin 'jiangmiao/auto-pairs'
+"Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 """ plugins before here
 
 call vundle#end()
@@ -97,8 +101,11 @@ let g:bufferline_echo = 0
 let g:cpp_class_scope_highlight = 1
 "autocmd vimenter * NERDTree
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
