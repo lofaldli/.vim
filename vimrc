@@ -9,8 +9,8 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-""" plugins after here
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -22,7 +22,6 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
-""" plugins before here
 
 call vundle#end()
 
@@ -76,8 +75,8 @@ set visualbell
 set t_vb=
 set tm=500
 
-" enable mouse WHY??
-"set mouse=a
+" enable mouse 
+"set mouse=a NO!
 
 
 " line numbers, tabs, indentation and line breaks
@@ -107,7 +106,7 @@ let g:syntastic_check_on_wq = 0
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+" delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
@@ -118,7 +117,7 @@ autocmd BufWrite *.cc :call DeleteTrailingWS()
 autocmd BufWrite *.c :call DeleteTrailingWS()
 autocmd BufWrite *.h :call DeleteTrailingWS()
 
-" Don't close window, when deleting a buffer
+" don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
    let l:currentBufNum = bufnr("%")
@@ -139,25 +138,32 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+" shorthand commands
+let mapleader=","
+map <leader>w :w<CR>
+map <leader><Tab> :bn<CR>
+map <leader>e :e 
+map <leader>q :q<CR>
+
+" move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" Return to last edit position when opening files (You want this!)
+" return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
-" Remember info about open buffers on close
+" remember info about open buffers on close
 set viminfo^=%
 
-" Treat long lines as break lines (useful when moving around in them)
+" treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
 
-" Smart way to move between windows
+" smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
