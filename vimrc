@@ -9,8 +9,6 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
 Plugin 'itchyny/lightline.vim'
 Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
@@ -79,6 +77,11 @@ set tm=500
 " enable mouse 
 "set mouse=a NO!
 
+" disable backups and swapfiles
+set nobackup
+set nowb
+set noswapfile
+
 
 " line numbers, tabs, indentation and line breaks
 set number
@@ -96,8 +99,7 @@ set noshowmode
 
 " plugin settings stuff
 "let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:bufferline_echo = 0
+"let g:airline_powerline_fonts = 1
 let g:cpp_class_scope_highlight = 1
 "autocmd vimenter * NERDTree
 let g:ycm_show_diagnostics_ui = 0
@@ -106,8 +108,31 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+let g:lightline = {
+            \'colorscheme': 'wombat',
+            \'active' : {
+            \   'left': [ ['mode', 'paste'],
+            \             ['fugitive', 'bufferline']]
+            \},
+            \'component' : {
+            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+            \},
+            \'component_visible_condition' : {
+            \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+            \},
+            \'component_function': {
+            \   'bufferline' : 'Bufline',
+            \}
+            \}
 
-" delete trailing white space on save, useful for Python and CoffeeScript ;)
+let g:bufferline_echo = 0
+let g:bufferline_modified = '+'
+function! Bufline()
+    let st=g:bufferline#refresh_status()
+    return g:bufferline_status_info.before . g:bufferline_status_info.current . g:bufferline_status_info.after
+endfunction
+
+" delete trailing white space on save
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
@@ -138,20 +163,7 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
-
-" shorthand commands
-let mapleader=","
-map <leader>w :w<CR>
-map <leader><Tab> :bn<CR>
-map <leader>e :e 
-map <leader>q :q<CR>
-
-" move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
+"
 " return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -159,6 +171,24 @@ autocmd BufReadPost *
      \ endif
 " remember info about open buffers on close
 set viminfo^=%
+
+" shorthand commands
+let mapleader=","
+map <leader>w :w<CR>
+map <leader><tab> :bn<CR>
+map <leader><s-tab> :bp<CR>
+map <leader>q :q<CR>
+
+" easy searching
+map <space> /
+map <c-space> ?
+map <leader><space> :nohlsearch<CR>
+
+" move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " treat long lines as break lines (useful when moving around in them)
 map j gj
