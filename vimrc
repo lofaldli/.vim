@@ -98,8 +98,6 @@ set tw=500
 set noshowmode
 
 " plugin settings stuff
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline_powerline_fonts = 1
 let g:cpp_class_scope_highlight = 1
 "autocmd vimenter * NERDTree
 let g:ycm_show_diagnostics_ui = 0
