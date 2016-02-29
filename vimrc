@@ -21,6 +21,7 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
+Plugin 'sukima/xmledit'
 
 call vundle#end()
 

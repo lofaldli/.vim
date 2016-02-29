@@ -1,12 +1,15 @@
 # .vim
 
-## installing vundle for plugin management
+1. install vundle for plugin management
   
         git clone https://github.com/gmarik/Vundle.vim bundle/Vundle.vim
+
+2. install other plugins
+
         vi vimrc
         :PluginInstall
+        :q!
   
-## compiling YouCompleteMe
+3. build ycm
   
-        cd .vim/bundle/YouCompleteMe
-        ./install.sh
+        python bundle/YouCompleteMe/install.py
