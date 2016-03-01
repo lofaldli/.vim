@@ -8,13 +8,15 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-
 Plugin 'itchyny/lightline.vim'
 Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'ervandew/supertab'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'jiangmiao/auto-pairs'
@@ -22,17 +24,40 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'sukima/xmledit'
+"Plugin 'wincent/command-t' 
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
+
+" shorthand commands
+let mapleader=" "
+map <leader>w :w<CR>
+map <leader><tab> :bn<CR>
+map <leader><s-tab> :bp<CR>
+map <leader>q :q<CR>
+nmap <leader>n :NERDTreeToggle<CR>
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+" smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
 " keep cursor on middle line
 set scrolloff=10000
 
-" determine file type based on its name or possibly its contents
+" determine file type based on its name or possibly its contents 
+" and set highlighting
 filetype indent plugin on
-
-" enable syntax highlighting
 syntax on
+colorscheme monokai
 
 " dont complain when closing without saving etc.
 set hidden
@@ -59,9 +84,6 @@ set nostartofline
 
 " show cursor position
 "set ruler
-
-" color scheme
-colorscheme monokai
 
 " always show status line
 set laststatus=2
@@ -98,13 +120,17 @@ set tw=500
 
 set noshowmode
 
-" plugin settings stuff
+" plugin settings
 let g:cpp_class_scope_highlight = 1
 "autocmd vimenter * NERDTree
+let NERDTreeShowHidden=1
+let NERDTreeMapActivateNode='<right>'
+let g:gitgutter_sign_column_always=1
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let python_highlight_all=1
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 let g:lightline = {
@@ -171,30 +197,12 @@ autocmd BufReadPost *
 " remember info about open buffers on close
 set viminfo^=%
 
-" shorthand commands
-let mapleader=","
-map <leader>w :w<CR>
-map <leader><tab> :bn<CR>
-map <leader><s-tab> :bp<CR>
-map <leader>q :q<CR>
-
-" easy searching
-map <space> /
-map <c-space> ?
-map <leader><space> :nohlsearch<CR>
-
-" move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-" treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
-
-" smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+"python with virualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir =os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF

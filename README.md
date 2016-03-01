@@ -13,3 +13,8 @@
 3. build ycm
   
         python bundle/YouCompleteMe/install.py
+
+## sources
+
+[1](http://marcgg.com/blog/2016/03/01/vimrc-example)
+[2](https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/#.Vi9-CN7uzXY.reddit)
