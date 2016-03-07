@@ -9,7 +9,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
-Plugin 'bling/vim-bufferline'
+Plugin 'ap/vim-buftabline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -20,14 +20,13 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'jiangmiao/auto-pairs'
-"Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'sukima/xmledit'
-"Plugin 'wincent/command-t' 
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'kien/ctrlp.vim'
+Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()
 
@@ -37,6 +36,7 @@ map <leader>w :w<CR>
 map <leader><tab> :bn<CR>
 map <leader><s-tab> :bp<CR>
 map <leader>q :q<CR>
+map <leader>d :bd<CR>
 nmap <leader>n :NERDTreeToggle<CR>
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
@@ -57,7 +57,8 @@ set scrolloff=10000
 " and set highlighting
 filetype indent plugin on
 syntax on
-colorscheme monokai
+set t_Co=256
+colorscheme Tomorrow-Night 
 
 " dont complain when closing without saving etc.
 set hidden
@@ -122,7 +123,6 @@ set noshowmode
 
 " plugin settings
 let g:cpp_class_scope_highlight = 1
-"autocmd vimenter * NERDTree
 let NERDTreeShowHidden=1
 let NERDTreeMapActivateNode='<right>'
 let g:gitgutter_sign_column_always=1
@@ -133,29 +133,18 @@ let g:syntastic_check_on_wq = 0
 let python_highlight_all=1
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-let g:lightline = {
-            \'colorscheme': 'wombat',
-            \'active' : {
-            \   'left': [ ['mode', 'paste'],
-            \             ['fugitive', 'bufferline']]
-            \},
-            \'component' : {
-            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-            \},
-            \'component_visible_condition' : {
-            \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-            \},
-            \'component_function': {
-            \   'bufferline' : 'Bufline',
-            \}
-            \}
 
-let g:bufferline_echo = 0
-let g:bufferline_modified = '+'
-function! Bufline()
-    let st=g:bufferline#refresh_status()
-    return g:bufferline_status_info.before . g:bufferline_status_info.current . g:bufferline_status_info.after
-endfunction
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'active': {
+    \   'left': [ ['mode'],
+    \             ['fugitive', 'readonly', 'filename', 'modified'] ]
+    \ },
+    \ 'component': {
+    \   'readonly': '%{&readonly?"r":""}',
+    \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+    \ },
+    \ }
 
 " delete trailing white space on save
 func! DeleteTrailingWS()
