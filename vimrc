@@ -144,6 +144,10 @@ let g:lightline = {
     \   'readonly': '%{&readonly?"r":""}',
     \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
     \ },
+    \ 'component_visible_condition': {
+    \   'readonly': '(&filetype!="help"&& &readonly)',
+    \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+    \ },
     \ }
 
 " delete trailing white space on save
