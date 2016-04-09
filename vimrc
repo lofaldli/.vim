@@ -12,7 +12,8 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'ap/vim-buftabline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+"Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'ervandew/supertab'
@@ -130,6 +131,7 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:buftabline_indicators=1
 let python_highlight_all=1
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
