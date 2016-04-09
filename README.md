@@ -1,5 +1,9 @@
 # .vim
 
+0. install a proper vim version (not `vim-tiny`)
+
+        sudo apt install vim
+
 1. install vundle for plugin management
   
         git clone https://github.com/gmarik/Vundle.vim bundle/Vundle.vim
