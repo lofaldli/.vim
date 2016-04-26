@@ -14,7 +14,7 @@
         :PluginInstall
         :q!
   
-3. build ycm
+3. build ycm (requires `cmake`, `g++` and `python-dev`)
   
         python bundle/YouCompleteMe/install.py
 
