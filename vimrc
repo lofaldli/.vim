@@ -1,115 +1,110 @@
-" this is vim, not vi
+" vim: fdm=marker foldenable sw=4 ts=4 sts=4
+"  
+
+" {{{ PLUGINS
+
 set nocompatible
-
-" vundle setup
 filetype off
+set rtp+=$HOME/.vim/bundle/Vundle.vim
 
-set rtp+=~/.vim/bundle/Vundle.vim
+" {{{ VUNDLE SETUP
+
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'ap/vim-buftabline'
+
+" }}}
+" {{{ TPOPE
+
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'sheerun/vim-polyglot'
+Plugin 'tpope/vim-git'
+
+" }}}
+" {{{ SCROOLOOSE
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'ervandew/supertab'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
-Plugin 'sukima/xmledit'
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+" }}}
+" {{{ PYTHON STUFF
+
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
-Plugin 'kien/ctrlp.vim'
+
+" }}}
+" {{{ APPEARENCE
+Plugin 'yonchu/accelerated-smooth-scroll'
+Plugin 'airblade/vim-gitgutter'
+let g:gitgutter_sign_column_always=1
+Plugin 'ap/vim-buftabline'
+let g:buftabline_indicators=1
+Plugin 'itchyny/lightline.vim'
+let g:lightline = {
+    \ 'colorscheme' : 'wombat',
+    \ 'active': {
+    \   'left': [ ['mode'],
+    \             ['fugitive', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component': {
+    \   'readonly': '%{&readonly?"r":""}',
+    \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+    \ },
+    \ 'component_visible_condition': {
+    \   'readonly': '(&filetype!="help"&& &readonly)',
+    \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+    \ },
+    \ }
 Plugin 'flazz/vim-colorschemes'
 
-" this guy remaps å to something weird 
-"Plugin 'jiangmiao/auto-pairs' 
+" }}}
+" {{{ MISC 
+
+Plugin 'jiangmiao/auto-pairs'  
+"Plugin 'kien/ctrlp.vim'
+"Plugin 'sukima/xmledit'
+Plugin 'ervandew/supertab'
+Plugin 'sheerun/vim-polyglot'
+
+" }}}
+" {{{ VUNDLE TEARDOWN
 
 call vundle#end()
 
-" shorthand commands
+" }}}
+
+" }}}
+" {{{ SYNTAX HIGHLIGHTING
+
+filetype plugin indent on
+syntax on
+set t_Co=256
+colorscheme Tomorrow-Night-Eighties
+
+" }}}
+" {{{ HOTKEYS
+
 let mapleader=" "
 map <leader>w :w<CR>
-map <leader><tab> :bn<CR>
-map <leader><s-tab> :bp<CR>
 map <leader>q :q<CR>
 map <leader>d :bd<CR>
-nmap <leader>n :NERDTreeToggle<CR>
-map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader><tab> :bn<CR>
+map <leader><s-tab> :bp<CR>
 
-" treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
 
-" smart way to move between windows
+map <C-h> <C-W>h
 map <C-j> <C-W>j
 map <C-k> <C-W>k
-map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" keep cursor on middle line
-set scrolloff=10000
+" }}}
+" {{{ LINE NUMBERS, TABS, INDENTATION AND LINE BREAKS
 
-" determine file type based on its name or possibly its contents 
-" and set highlighting
-filetype indent plugin on
-syntax on
-set t_Co=256
-colorscheme Tomorrow-Night 
-
-" dont complain when closing without saving etc.
-set hidden
-
-" better autocompletion
-set wildmenu
-
-" show partial commands
-set showcmd
-
-" highlight search results
-set hlsearch
-
-" case insensitive search, except when searching for uppercase
-set ignorecase
-set smartcase
-
-" allow backspacing over indents, line breaks and start of insert action
-set backspace=indent,eol,start
-set whichwrap+=<,>,h,l
-
-" dont always go to start of line
-set nostartofline
-
-" show cursor position
-"set ruler
-
-" always show status line
-set laststatus=2
-
-" ask if you wish to save, instead of failing a command because of unsaved changes
-set confirm
-
-" disable error sounds
-set noerrorbells
-set visualbell
-set t_vb=
-set tm=500
-
-" enable mouse 
-"set mouse=a NO!
-
-" disable backups and swapfiles
-set nobackup
-set nowb
-set noswapfile
-
-
-" line numbers, tabs, indentation and line breaks
 set number
 set shiftwidth=4
 set softtabstop=4
@@ -121,84 +116,97 @@ set wrap
 set lbr
 set tw=500
 
+" }}}
+" {{{ MISC
+
 set noshowmode
+set hidden
+set showcmd
+set hlsearch
+set ignorecase
+set smartcase
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+set nostartofline
+set laststatus=2
+set confirm
+set scrolloff=10000
 
-" plugin settings
-let g:cpp_class_scope_highlight = 1
-let NERDTreeShowHidden=1
-let NERDTreeMapActivateNode='<right>'
-let g:gitgutter_sign_column_always=1
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:buftabline_indicators=1
-let python_highlight_all=1
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-
-let g:lightline = {
-    \ 'colorscheme': 'wombat',
-    \ 'active': {
-    \   'left': [ ['mode'],
-    \             ['fugitive', 'readonly', 'filename', 'modified'] ]
-    \ },
-    \ 'component': {
-    \   'readonly': '%{&readonly?"r":""}',
-    \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-    \ },
-    \ 'component_visible_condition': {
-    \   'readonly': '(&filetype!="help"&& &readonly)',
-    \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-    \ },
-    \ }
-
-" delete trailing white space on save
+" }}}
+" {{{ DELETE TRAILING WHITESPACES
 func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.cc :call DeleteTrailingWS()
-autocmd BufWrite *.c :call DeleteTrailingWS()
 autocmd BufWrite *.h :call DeleteTrailingWS()
+autocmd BufWrite *.c :call DeleteTrailingWS()
+" }}}
+" {{{ FROM 'no_plugins' TALK
 
-" don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
+" {{{ FINDING FILES
+" - :find <tab> etc.
 
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
+" search into subfolders
+" privides tab-completion for all file-related tasks
+set path+=**
 
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
+" display all matching files when we tab complete
+set wildmenu
 
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
-endfunction
+" }}}
+
+" {{{ TAG JUMPING
+" - ^] to jump to tag under cursor
+" - g^] for ambigous tags
+
+" create the tags file (requires ctags)
+command! MakeTags !ctags -R .
+
+" }}}
+
+" {{{ AUTOCOMPLETE
+
+" documented in |ins-completion|
+" - ^x^n for JUST this file
+" - ^x^f for filenames
+" - ^x^] for tags only
+" - ^n for basic usage (^n and ^p to go back and forth)
+
+" }}}
+
+" {{{ FILE BROWSING 
+" documented in |netrw-browse-maps|
+" - :edit a folder to open file browser
+" - <CR>/v/t to open in h-split/v-split/tab
+
+" tweaks for browsing
+let g:netrw_banner=0       " disable banner
+let g:netrw_browse_split=4 " open in prior window
+let g:netrw_altv=1         " open splits to the right
+let g:netrw_liststyle=3    " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+" }}}
+
+" {{{ SNIPPETS
+
+" read empty html template and move cursor to title
+nnoremap ,html :-1read $HOME/.vim/snippets/skeleton.html<CR>3jwf>a
+
+" BUILD INTEGRATION
+" steal Mr. Bradley's formatter and add it to our spec_helper
 "
-" return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
-" remember info about open buffers on close
-set viminfo^=%
+" configure the :make to run RSpec (or something else)
+set makeprg=bundle\ exec\ rspec\ -f\ QuickfixFormatter
 
-"python with virualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir =os.environ['VIRTUAL_ENV']
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
+" }}}
+
+" }}}
+" run check on write
+"autocmd BufWritePost *.py call Flake8()
+" show errors in file
+"let g:flake8_show_in_file=1
