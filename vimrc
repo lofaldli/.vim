@@ -7,14 +7,9 @@ set nocompatible
 filetype off
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 
-" {{{ VUNDLE SETUP
-
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-
-" }}}
-" {{{ TPOPE
 
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
@@ -22,21 +17,15 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 
-" }}}
-" {{{ SCROOLOOSE
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
-" }}}
-" {{{ PYTHON STUFF
 
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
 
-" }}}
-" {{{ APPEARENCE
 Plugin 'yonchu/accelerated-smooth-scroll'
 Plugin 'airblade/vim-gitgutter'
 let g:gitgutter_sign_column_always=1
@@ -60,21 +49,16 @@ let g:lightline = {
     \ }
 Plugin 'flazz/vim-colorschemes'
 
-" }}}
-" {{{ MISC 
-
+Plugin 'pangloss/vim-javascript'
 Plugin 'jiangmiao/auto-pairs'  
 "Plugin 'kien/ctrlp.vim'
 "Plugin 'sukima/xmledit'
 Plugin 'ervandew/supertab'
 Plugin 'sheerun/vim-polyglot'
-
-" }}}
-" {{{ VUNDLE TEARDOWN
+Plugin 'jpalardy/vim-slime'
 
 call vundle#end()
 
-" }}}
 
 " }}}
 " {{{ SYNTAX HIGHLIGHTING
@@ -83,11 +67,12 @@ filetype plugin indent on
 syntax on
 set t_Co=256
 colorscheme Tomorrow-Night-Eighties
+"colorscheme C64
 
 " }}}
 " {{{ HOTKEYS
 
-let mapleader=" "
+let mapleader=","
 map <leader>w :w<CR>
 map <leader>q :q<CR>
 map <leader>d :bd<CR>
