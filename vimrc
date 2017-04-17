@@ -6,10 +6,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-buftabline'
 Plug 'ervandew/supertab'
-Plug 'flazz/vim-colorschemes'
 Plug 'itchyny/lightline.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'Shougo/neocomplete.vim'
+Plug 'Townk/vim-autoclose'
 Plug 'vim-scripts/indentpython.vim'
+Plug 'vim-syntastic/syntastic'
 Plug 'yonchu/accelerated-smooth-scroll'
 
 call plug#end()
@@ -37,10 +41,9 @@ set whichwrap+=<,>,h,l
 set nostartofline
 set laststatus=2
 set confirm
+set cursorline
 
 let mapleader=' '
-map <leader>w :w<CR>
-map <leader>q :q<CR>
 map <leader>d :bd<CR>
 map <leader>n :bn<CR>
 map <leader>p :bp<CR>
@@ -57,6 +60,7 @@ map <C-k> <C-W>k
 map <C-l> <C-W>l
 
 set t_Co=256
+let base16colorspace=256
 
 " improved file browsing with :e
 set path+=**
@@ -68,30 +72,24 @@ let g:netrw_liststyle=3    " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
-" borrowed from tomorrow night eighties
-hi Constant   ctermfg=209 guifg=#f99157
-hi Comment    ctermfg=246 guifg=#999999
-hi Function   ctermfg=68  guifg=#6699cc
-hi Identifier ctermfg=210 guifg=#f2777a
-hi Keyword    ctermfg=209 guifg=#f99157
-hi LineNr     ctermfg=238 guifg=#515151
-hi Normal     ctermfg=251 guifg=#cccccc
-hi Operator   ctermfg=80  guifg=#66cccc
-hi PreProc    ctermfg=176 guifg=#cc99cc
-hi Statement  ctermfg=251 guifg=#cccccc
-hi StatusLine ctermfg=59  guifg=#4d5057 ctermbg=251 guibg=#cccccc cterm=reverse
-hi Special    ctermfg=251 guifg=#cccccc
-hi String     ctermfg=114 guifg=#99cc99
-hi Type       ctermfg=68  guifg=#6699cc 
-
-hi vimCommand ctermfg=210 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE
-
 " plugin settings
+
 let g:gitgutter_sign_column_always=1
+
 let g:buftabline_indicators=1
+
 let g:lightline = {
             \   'colorscheme': 'seoul256',
             \   'active': {
             \     'left': [ ['mode'], ['filename', 'modified'] ],
             \   }
             \ }
+
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+
+"let g:acp_enableAtStartup=0
+"let g:neocomplete#enable_at_startup=1
+"let g:neocomplete#enable_smart_case=1
+"let g:neocomplete#sources#syntax#min_keyword_length=3
