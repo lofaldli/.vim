@@ -6,11 +6,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-buftabline'
 Plug 'ervandew/supertab'
-"Plug 'itchyny/lightline.vim'
-Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/neocomplete.vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/indentpython.vim'
@@ -83,7 +82,13 @@ imap jk <ESC>
 " syntax highlighting
 set t_Co=256
 let base16colorspace=256
-colorscheme Tomorrow-Night-Eighties
+
+if has('gui_running')
+    colorscheme Tomorrow-Night-Eighties
+else
+    colorscheme Tomorrow-Night-Eighties-Transparent
+endif
+
 
 " improved file browsing with :e
 set path+=**
